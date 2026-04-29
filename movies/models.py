@@ -13,6 +13,19 @@ class Category(models.Model):
         return self.name
 
 
+# NUEVO
+class Genre(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+
+    class Meta:
+        ordering = ["id"]
+        verbose_name = "Genre"
+        verbose_name_plural = "Genres"
+
+    def __str__(self):
+        return self.name
+
+
 class Movie(models.Model):
     title = models.CharField(max_length=150)
     synopsis = models.TextField()
@@ -25,6 +38,13 @@ class Movie(models.Model):
         on_delete=models.CASCADE,
         related_name="movies",
         null=True,
+        blank=True,
+    )
+
+    # NUEVO
+    genres = models.ManyToManyField(
+        Genre,
+        related_name="movies",
         blank=True,
     )
 

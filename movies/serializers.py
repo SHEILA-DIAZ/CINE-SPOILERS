@@ -2,7 +2,7 @@ from datetime import datetime
 
 from rest_framework import serializers
 
-from .models import Category, Movie
+from .models import Category, Genre, Movie
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -15,8 +15,22 @@ class CategorySerializer(serializers.ModelSerializer):
         read_only_fields = ("id",)
 
 
+# NUEVO
+class GenreSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Genre
+        fields = (
+            "id",
+            "name",
+        )
+        read_only_fields = ("id",)
+
+
 class MovieSerializer(serializers.ModelSerializer):
     category_detail = CategorySerializer(source="category", read_only=True)
+
+    # NUEVO
+    genres_detail = GenreSerializer(source="genres", many=True, read_only=True)
 
     class Meta:
         model = Movie
@@ -29,10 +43,18 @@ class MovieSerializer(serializers.ModelSerializer):
             "is_available",
             "category",
             "category_detail",
+            "genres",          # NUEVO: recibe IDs
+            "genres_detail",   # NUEVO: muestra información completa
             "created_at",
             "updated_at",
         )
-        read_only_fields = ("id", "created_at", "updated_at", "category_detail")
+        read_only_fields = (
+            "id",
+            "created_at",
+            "updated_at",
+            "category_detail",
+            "genres_detail",
+        )
 
     def validate_release_year(self, value):
         current_year = datetime.now().year
