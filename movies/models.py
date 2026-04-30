@@ -6,21 +6,16 @@ class Category(models.Model):
 
     class Meta:
         ordering = ["id"]
-        verbose_name = "Category"
-        verbose_name_plural = "Categories"
 
     def __str__(self):
         return self.name
 
 
-# NUEVO
 class Genre(models.Model):
     name = models.CharField(max_length=100, unique=True)
 
     class Meta:
         ordering = ["id"]
-        verbose_name = "Genre"
-        verbose_name_plural = "Genres"
 
     def __str__(self):
         return self.name
@@ -41,7 +36,6 @@ class Movie(models.Model):
         blank=True,
     )
 
-    # NUEVO
     genres = models.ManyToManyField(
         Genre,
         related_name="movies",

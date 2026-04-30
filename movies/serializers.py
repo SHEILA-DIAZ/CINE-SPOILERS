@@ -15,7 +15,6 @@ class CategorySerializer(serializers.ModelSerializer):
         read_only_fields = ("id",)
 
 
-# NUEVO
 class GenreSerializer(serializers.ModelSerializer):
     class Meta:
         model = Genre
@@ -28,8 +27,6 @@ class GenreSerializer(serializers.ModelSerializer):
 
 class MovieSerializer(serializers.ModelSerializer):
     category_detail = CategorySerializer(source="category", read_only=True)
-
-    # NUEVO
     genres_detail = GenreSerializer(source="genres", many=True, read_only=True)
 
     class Meta:
@@ -43,17 +40,17 @@ class MovieSerializer(serializers.ModelSerializer):
             "is_available",
             "category",
             "category_detail",
-            "genres",          # NUEVO: recibe IDs
-            "genres_detail",   # NUEVO: muestra información completa
+            "genres",
+            "genres_detail",
             "created_at",
             "updated_at",
         )
         read_only_fields = (
             "id",
-            "created_at",
-            "updated_at",
             "category_detail",
             "genres_detail",
+            "created_at",
+            "updated_at",
         )
 
     def validate_release_year(self, value):
@@ -73,22 +70,3 @@ class MovieSerializer(serializers.ModelSerializer):
             )
 
         return value
-
-    def validate(self, data):
-        title = data.get("title")
-        release_year = data.get("release_year")
-
-        queryset = Movie.objects.filter(
-            title__iexact=title,
-            release_year=release_year,
-        )
-
-        if self.instance:
-            queryset = queryset.exclude(id=self.instance.id)
-
-        if queryset.exists():
-            raise serializers.ValidationError(
-                "Esta película ya existe."
-            )
-
-        return data

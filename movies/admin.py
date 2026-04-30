@@ -10,7 +10,6 @@ class CategoryAdmin(admin.ModelAdmin):
     ordering = ("id",)
 
 
-# NUEVO
 @admin.register(Genre)
 class GenreAdmin(admin.ModelAdmin):
     list_display = ("id", "name")
@@ -30,5 +29,5 @@ class MovieAdmin(admin.ModelAdmin):
     )
     list_filter = ("is_available", "release_year", "category", "genres")
     search_fields = ("title",)
-    filter_horizontal = ("genres",)  # NUEVO
+    filter_horizontal = ("genres",)
     ordering = ("id",)

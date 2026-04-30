@@ -5,7 +5,7 @@ from .views import CategoryViewSet, GenreViewSet, MovieViewSet
 
 router = DefaultRouter()
 router.register("categories", CategoryViewSet, basename="category")
-router.register("genres", GenreViewSet, basename="genre")  # NUEVO
+router.register("genres", GenreViewSet, basename="genre")
 router.register("movies", MovieViewSet, basename="movie")
 
 urlpatterns = [

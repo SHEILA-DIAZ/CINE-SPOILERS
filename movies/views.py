@@ -11,7 +11,6 @@ class CategoryViewSet(ModelViewSet):
         return Category.objects.all().order_by("id")
 
 
-# NUEVO
 class GenreViewSet(ModelViewSet):
     serializer_class = GenreSerializer
 
@@ -26,7 +25,7 @@ class MovieViewSet(ModelViewSet):
         return (
             Movie.objects
             .select_related("category")
-            .prefetch_related("genres")  # NUEVO
+            .prefetch_related("genres")
             .all()
             .order_by("id")
         )
