@@ -1,7 +1,6 @@
 # 🎬 CINE-SPOILERS
 
-Aplicación web desarrollada con **Django** que permite gestionar películas y categorías,
-mostrando información y spoilers de tus películas favoritas.
+Aplicación backend desarrollada con Django REST Framework que permite gestionar películas, categorías, géneros y reseñas, mostrando información y spoilers de tus películas favoritas mediante una API REST.
 
 ## Evidencias-Sheila Diaz Rojas
 
@@ -14,5 +13,11 @@ mostrando información y spoilers de tus películas favoritas.
 ### 🧩 Crear categoría
 ![Crear categoría](docs/images/03.png)
 
-### 📋 Lista de películas
-![Lista de películas](docs/images/04.png)
+### 🎬 Movie con Category y Genres
+![Movie con Category y Genres](docs/images/04.png)
+
+### ⭐ Reviews (Seed + POST)
+Se implementó una nueva app reviews que permite registrar reseñas de películas, incluyendo autor, comentario y puntuación.
+Además, se añadió un comando personalizado (seed) para generar datos de prueba automáticamente, y se validó la creación de reviews tanto de forma automática como manual mediante la API.
+
+![Reviews](docs/images/05.png)
